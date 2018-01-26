@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: f47855caecc6049298bbfb40387c64e1
+timeCreated: 1517006309
+licenseType: Free
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Petit Formal Script
+  fontNames:
+  - Petit Formal Script
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

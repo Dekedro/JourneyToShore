@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 1ae7ae1d3c27341d9af9c40a843704c5
+timeCreated: 1517007456
+licenseType: Free
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Miltonian Tattoo
+  fontNames:
+  - Miltonian Tattoo
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
