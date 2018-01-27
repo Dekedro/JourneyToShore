@@ -15,7 +15,7 @@ public class SlidingBehaviour : MonoBehaviour {
 	private Action<bool> _callback = null;
 
 	private void Awake() {
-		_startingPosition = transform.position;
+		_startingPosition = transform.localPosition;
 	}
 		
 	public void Toggle() {
@@ -29,7 +29,7 @@ public class SlidingBehaviour : MonoBehaviour {
 	public void TeleportToTarget() {
 		if (_isAtOrigin) {
 			StopAllCoroutines();
-			transform.position = targetPosition;
+			transform.localPosition = targetPosition;
 			_isAtOrigin = false;
 		}
 	}
@@ -37,7 +37,7 @@ public class SlidingBehaviour : MonoBehaviour {
 	public void TeleportToOrigin() {
 		if (!_isAtOrigin) {
 			StopAllCoroutines();
-			transform.position = _startingPosition;
+			transform.localPosition = _startingPosition;
 			_isAtOrigin = true;
 		}
 	}
@@ -46,7 +46,7 @@ public class SlidingBehaviour : MonoBehaviour {
 	{
 		if (_isAtOrigin) {
 			StopAllCoroutines();
-			StartCoroutine(Move(transform.position, targetPosition, false));
+			StartCoroutine(Move(transform.localPosition, targetPosition, false));
 		}
 	}
 
@@ -54,14 +54,14 @@ public class SlidingBehaviour : MonoBehaviour {
 	{
 		if (!_isAtOrigin) {
 			StopAllCoroutines();
-			StartCoroutine(Move(transform.position, _startingPosition, true));
+			StartCoroutine(Move(transform.localPosition, _startingPosition, true));
 		}
 
 	}
 
 	private IEnumerator Move(Vector2 startPos, Vector2 targetPos, bool willBeAtOrigin) {
 		var startTime = Time.time;
-		while (((Vector2)transform.position - targetPos).magnitude > Time.deltaTime) {
+		while (((Vector2)transform.localPosition - targetPos).magnitude > Time.deltaTime) {
 
 			var timePauseStarted = Time.time;
 			while (_movementPaused) {
@@ -70,7 +70,7 @@ public class SlidingBehaviour : MonoBehaviour {
 			startTime += Time.time - timePauseStarted;
 
 			if (useLinearInterpolation) {
-				transform.position = Vector3.Lerp(startPos, targetPos, Time.time - startTime);
+				transform.localPosition = Vector3.Lerp(startPos, targetPos, Time.time - startTime);
 			} else {
 				var currentTime = Time.time - startTime;
 				var progress = Utils.Remap(
@@ -80,14 +80,14 @@ public class SlidingBehaviour : MonoBehaviour {
 					0,
 					1
 				);
-				transform.position = new Vector3(
+				transform.localPosition = new Vector3(
 					Utils.Remap(progress, 0, 1, startPos.x, targetPos.x),
 					Utils.Remap(progress, 0, 1, startPos.y, targetPos.y));
 			}
 
-			transform.position = new Vector3(
-				transform.position.x,
-				transform.position.y,
+			transform.localPosition = new Vector3(
+				transform.localPosition.x,
+				transform.localPosition.y,
 				_startingPosition.z);
 			yield return null;
 		}
