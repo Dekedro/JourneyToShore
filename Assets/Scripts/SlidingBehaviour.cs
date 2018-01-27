@@ -18,10 +18,6 @@ public class SlidingBehaviour : MonoBehaviour {
 		_startingPosition = transform.position;
 	}
 		
-	public void Update() {
-		Debug.Log (transform.position);
-	}
-
 	public void Toggle() {
 		if (_isAtOrigin) {
 			MoveToTarget ();

@@ -15,7 +15,4 @@ public class SubmarineBehaviour : MonoBehaviour {
 		Resources.Add("Oxygen", new SubmarineResource());
 		Resources.Add("Depth", new SubmarineResource (0f, 1000f, 900f, 0.02f, true));
 	}
-	
-	private void Update () {
-	}
 }
