@@ -10,7 +10,7 @@ public class WheelWidget : Widget {
 
 	private void Start() {
 		_player = GameObject.FindGameObjectWithTag ("Player");
-		rotationSpeed = 0.05f;
+		rotationSpeed = 0.1f;
 	}
 
 	private void OnMouseDown() {
@@ -21,12 +21,14 @@ public class WheelWidget : Widget {
 
 	Vector3 lastMouseCoord;
 	private IEnumerator FollowMouse() {
-		Debug.Log ("nueina");
+		//Debug.Log ("nueina");
 		var diff = lastMouseCoord - Camera.main.ScreenToWorldPoint (Input.mousePosition);
 		bool initialized = false;
 		float startAngle = 0;
+		float rotated = 0;
 	
-		while(Input.GetMouseButton(0)) {
+		float lastAngle = 0;
+		while(Input.GetMouseButton(0) && System.Math.Abs(rotated) < 180) {
 			if (!initialized) {
 				initialized = true;
 				var point = Camera.main.ScreenToWorldPoint (Input.mousePosition);// + diff;
@@ -43,14 +45,27 @@ public class WheelWidget : Widget {
 				float AngleRad = Mathf.Atan2(point.y - transform.position.y, point.x - transform.position.x);
 				float AngleDeg = (180 / Mathf.PI) * AngleRad - 90;
 				//Debug.Log (AngleDeg);
-				Debug.Log (transform.rotation.z);
-				Debug.Log (AngleDeg - startAngle);
-				if (System.Math.Abs(AngleDeg - startAngle) > 0.1)
+				//Debug.Log (transform.rotation.z);
+				//Debug.Log (AngleDeg - startAngle);
+				//startAngle
+				startAngle += 0.1f*(AngleDeg-startAngle);
+				if (System.Math.Abs (AngleDeg - startAngle) > 0.1) {
 					transform.rotation = Quaternion.Euler (transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z + (AngleDeg - startAngle)*rotationSpeed);
+					rotated += (AngleDeg - startAngle) * rotationSpeed;
+					lastAngle = AngleDeg;
+					Debug.Log (rotated);
+				}
+
+					
 				//transform.rotation = Quaternion.Lerp (transform.rotation, Quaternion.Euler (0, 0, AngleDeg), Time.deltaTime * rotationSpeed);
 				_player.GetComponent<MovementBehaviour> ().targetRotation = transform.rotation;
 
 			}
+			yield return null;
+		}
+		while (!Input.GetMouseButton (0) && startAngle != lastAngle) {
+			transform.rotation = Quaternion.Euler (transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z + (lastAngle - startAngle)*rotationSpeed);
+			startAngle += 0.1f*(lastAngle-startAngle);
 			yield return null;
 		}
 		lastMouseCoord = Camera.main.ScreenToWorldPoint (Input.mousePosition);
