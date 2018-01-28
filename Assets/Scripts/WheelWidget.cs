@@ -53,7 +53,6 @@ public class WheelWidget : Widget {
 					transform.rotation = Quaternion.Euler (transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z + (AngleDeg - startAngle)*rotationSpeed);
 					rotated += (AngleDeg - startAngle) * rotationSpeed;
 					lastAngle = AngleDeg;
-					Debug.Log (rotated);
 				}
 
 					

@@ -15,7 +15,7 @@ public class SubmarineBehaviour : MonoBehaviour {
 		Resources.Add("Food", new SubmarineResource());
 		Resources.Add("Oxygen", new SubmarineResource());
 		Resources ["Oxygen"].ConsumeMultiplyer = 1.5f; //Because starts off using engine instead of battery
-		Resources.Add("Speed", new SubmarineResource(-3f, 3f, 1f, 0f, false));
+		Resources.Add("Speed", new SubmarineResource(-50f, 50f, 1f, 0f, false));
 		Resources.Add("Depth", new SubmarineResource (0f, 1000f, 100f, 0.01f, true));
 		Resources.Add("Armor", new SubmarineResource (0f, 100f, 100f, 0.05f / Time.deltaTime, true));
 		Resources ["Armor"].Cooldown = 1;

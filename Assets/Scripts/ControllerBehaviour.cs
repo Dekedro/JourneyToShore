@@ -27,8 +27,11 @@ public class ControllerBehaviour : MonoBehaviour {
 
 	private void SetBounds() {
 		foreach (var sliderName in _controllers.Keys) {
-			_controllers[sliderName].minValue = 0;
-			_controllers[sliderName].maxValue = 1;
+			if (sliderName != "Speed") {
+				_controllers[sliderName].minValue = 0;
+				_controllers[sliderName].maxValue = 1;
+				_controllers [sliderName].value = 0;
+			}
 		}
 	}
 
@@ -36,8 +39,10 @@ public class ControllerBehaviour : MonoBehaviour {
 		var slider = _controllers["Speed"];
 
 		_resources ["Speed"].Value = _resources ["Speed"].UpperBound * slider.value;
-		_resources ["Fuel"].ConsumeMultiplyer = 1f + slider.value;
-		_resources ["Battery"].ConsumeMultiplyer = 1f + slider.value;
+		Debug.Log (_resources ["Speed"].Value);
+
+		_resources ["Fuel"].ConsumeMultiplyer = 1f + Mathf.Abs(slider.value);
+		_resources ["Battery"].ConsumeMultiplyer = 1f + Mathf.Abs(slider.value);
 	}
 
 	private bool isUsingBattery = false;

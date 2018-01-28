@@ -33,7 +33,7 @@ public class MovementBehaviour : MonoBehaviour {
 	}
 
 	private void Move() {
-		if (GetComponent<Rigidbody2D> ().velocity.magnitude < _speed.Value) {
+		if (GetComponent<Rigidbody2D> ().velocity.magnitude < Mathf.Abs(_speed.Value)) {
 			GetComponent<Rigidbody2D> ().AddForce (transform.up * _speed.Value);
 		}
 
