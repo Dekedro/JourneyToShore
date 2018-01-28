@@ -20,6 +20,8 @@ public class ControllerBehaviour : MonoBehaviour {
 			_controllers.Add(slider.gameObject.name, slider);
 		}
 
+		
+		ConfigureSpeedController ();
 		SetBounds ();
 	}
 

@@ -13,8 +13,10 @@ public class SubmarineResource {
 	public float ValueConsumedPerSecond { get; }
 	public bool IsBeingConsumed { get; set; }
 	public float ConsumeMultiplyer { get; set; }
-
+	public float Cooldown { get; set; }
 	public Func<IDictionary<string, SubmarineResource>, IDictionary<string, Slider>, SubmarineResource, float> ConsumingAction { get; set; }
+
+	private float _lastTimeConsumed;
 
 	public float Percentage { 
 		get 
@@ -33,10 +35,11 @@ public class SubmarineResource {
 		IsBeingConsumed = isBeingConsumed;
 		ValueConsumedPerSecond = UpperBound * PercentConsumedPerSecond;
 		ConsumeMultiplyer = 1;
+		Cooldown = 0;
 	}
 
 	public void Consume(IDictionary<string, SubmarineResource> resources, IDictionary<string, Slider> controls) {
-		if (IsBeingConsumed) {
+		if (IsBeingConsumed && Time.time > _lastTimeConsumed + Cooldown) {
 			if (ConsumingAction == null) {
 				if (Value - ValueConsumedPerSecond * ConsumeMultiplyer * Time.deltaTime >= 0)
 					Value -= ValueConsumedPerSecond * ConsumeMultiplyer * Time.deltaTime;
@@ -45,6 +48,7 @@ public class SubmarineResource {
 			} else {
 				Value = ConsumingAction(resources, controls, this);
 			}
+			_lastTimeConsumed = Time.time;
 		}
 	}
 }

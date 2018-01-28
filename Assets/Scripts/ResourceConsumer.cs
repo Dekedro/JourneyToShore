@@ -27,7 +27,15 @@ public class ResourceConsumer : MonoBehaviour {
 	
 	private void Update () {
 		foreach (var resource in _resources.Keys) {
-			_resources[resource].Consume (_resources, _controlSliders);
+			if(resource != "Armor")
+				_resources[resource].Consume (_resources, _controlSliders);
+		}
+	}
+
+	public void OnCollisionEnter2D(Collision2D collision) {
+		if (collision.collider.gameObject.name == "Border") {
+			Debug.Log ("lol");
+			_resources ["Armor"].Consume (_resources, _controlSliders);
 		}
 	}
 }

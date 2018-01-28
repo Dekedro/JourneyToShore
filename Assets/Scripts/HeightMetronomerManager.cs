@@ -14,9 +14,10 @@ public class HeightMetronomerManager : MonoBehaviour {
 	
 	private IEnumerator DrawGrapher() {
 		while (true) {
-			Debug.Log (_depth.Value);
-			_grapher.DrawHeight (100);
-			yield return new WaitForSeconds (Time.deltaTime * 10);
+			//Debug.Log (_depth.Value);
+			_grapher.DrawHeight (_depth.Value);
+			yield return null;
+			//yield return new WaitForSeconds (Time.deltaTime);
 		}
 	}
 }

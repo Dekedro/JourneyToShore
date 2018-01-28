@@ -66,19 +66,13 @@ public class HeightMetronomerPaint : MonoBehaviour {
 	// Use this for initialization
 
 	private SpriteRenderer background;
-	void Start () {
+	void Awake () {
 		background = GetComponentInParent<SpriteRenderer> ();
 		//background = GetComponentInChildren<SpriteRenderer> ().Where (renderer => renderer.gameObject.name == "Background").First ();
 
 		P = new Vector3[(int)maxNumberOfPoints];
 		start = background.sprite.bounds.min;
-		Debug.Log (start.x);
-		Debug.Log (start.y);
-		Debug.Log (start.z);
 		end = background.sprite.bounds.max;
-		Debug.Log (start.x);
-		Debug.Log (start.y);
-		Debug.Log (start.z);
 		movePoint = new Vector3((end.x - start.x)/maxNumberOfPoints, 0, -8);
 		points = new List<Vector3> ();
 
@@ -96,7 +90,7 @@ public class HeightMetronomerPaint : MonoBehaviour {
 	private IEnumerator DrawGrapher() {
 		while (true) {
 			//Debug.Log (_depth.Value);
-			DrawHeight (100);
+			//DrawHeight (1000);
 			yield return new WaitForSeconds (Time.fixedDeltaTime * 1);
 		}
 	}
