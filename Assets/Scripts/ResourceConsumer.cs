@@ -37,4 +37,13 @@ public class ResourceConsumer : MonoBehaviour {
 			_resources ["Armor"].Consume (_resources, _controlSliders);
 		}
 	}
+
+	public void OnTriggerEnter2D(Collider2D collider) {
+		if (collider.gameObject.CompareTag ("RechargingArea")) {
+			var rechargingArea = collider.gameObject.GetComponent<RechargingArea> ();
+			foreach (var rechargable in rechargingArea.RechargableResources) {
+				_resources [rechargable].Recharge ();
+			}
+		}
+	}
 }

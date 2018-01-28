@@ -51,4 +51,12 @@ public class SubmarineResource {
 			_lastTimeConsumed = Time.time;
 		}
 	}
+
+	public void Recharge() {
+		if (Value + UpperBound / 10 > UpperBound)
+			Value += UpperBound / 10f;
+		else {
+			Value = UpperBound;
+		}
+	}
 }
