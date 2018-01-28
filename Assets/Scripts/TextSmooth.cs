@@ -10,7 +10,7 @@ public class TextSmooth : MonoBehaviour {
 	//float last_text_printed;
 	bool stop = false;
 	string now_writing_text;
-	float writing_speed = 10;
+	float writing_speed = 20;
 	void Start () {
 		scene_start = Time.time;
 		//last_text_printed = scene_start;
@@ -38,11 +38,16 @@ public class TextSmooth : MonoBehaviour {
 
 	private IEnumerator Whatever(string s) {
 		int n = 0;
+		int t = 0;
 		while (n < s.Length && !stop && s==now_writing_text) {
 			//text += "a";
-			GetComponent<Text> ().text += s [n];
-			n++;
-			yield return new WaitForSeconds (Time.fixedDeltaTime * writing_speed);
+			if(t*writing_speed > n) {
+				GetComponent<Text> ().text += s [n];
+				n++;
+
+			}
+			t++;
+			yield return null;
 		}
 		stop = true;
 	}
@@ -56,10 +61,13 @@ public class TextSmooth : MonoBehaviour {
 		if (stop && Input.GetKeyDown("space")) {
 			stop = false;
 			GetComponent<Text>().text = "";
-			if (story.First.Value != null) {
+			if (story.First != null) {
 				now_writing_text = story.First.Value;
 				StartCoroutine (Whatever (story.First.Value));
 				story.RemoveFirst ();
+			} else {
+				transform.parent.gameObject.SetActive(false);
+				Time.timeScale = 1;
 			}
 
 		} 
