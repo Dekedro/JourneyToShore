@@ -34,7 +34,6 @@ public class ResourceConsumer : MonoBehaviour {
 
 	public void OnCollisionEnter2D(Collision2D collision) {
 		if (collision.collider.gameObject.name == "Border") {
-			Debug.Log ("lol");
 			_resources ["Armor"].Consume (_resources, _controlSliders);
 		}
 	}
