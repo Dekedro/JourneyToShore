@@ -66,7 +66,7 @@ public class HeightMetronomerPaint : MonoBehaviour {
 	// Use this for initialization
 
 	private SpriteRenderer background;
-	void Start () {
+	void Awake () {
 		background = GetComponentInParent<SpriteRenderer> ();
 		//background = GetComponentInChildren<SpriteRenderer> ().Where (renderer => renderer.gameObject.name == "Background").First ();
 
