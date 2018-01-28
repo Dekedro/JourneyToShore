@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+using UnityEngine.UI;
 
 public class SubmarineResource {
 
@@ -8,7 +10,11 @@ public class SubmarineResource {
 	public float LowerBound { get; set; }
 	public float Value { get; set; }
 	public float PercentConsumedPerSecond { get; set; }
+	public float ValueConsumedPerSecond { get; }
 	public bool IsBeingConsumed { get; set; }
+	public float ConsumeMultiplyer { get; set; }
+
+	public Func<IDictionary<string, SubmarineResource>, IDictionary<string, Slider>, SubmarineResource, float> ConsumingAction { get; set; }
 
 	public float Percentage { 
 		get 
@@ -25,9 +31,20 @@ public class SubmarineResource {
 		Value = value;
 		PercentConsumedPerSecond = percentConsumedPerSecond;
 		IsBeingConsumed = isBeingConsumed;
+		ValueConsumedPerSecond = UpperBound * PercentConsumedPerSecond;
+		ConsumeMultiplyer = 1;
 	}
 
-	public void Consume() {
-		Value -= Value * PercentConsumedPerSecond * Time.deltaTime;
+	public void Consume(IDictionary<string, SubmarineResource> resources, IDictionary<string, Slider> controls) {
+		if (IsBeingConsumed) {
+			if (ConsumingAction == null) {
+				if (Value - ValueConsumedPerSecond * ConsumeMultiplyer * Time.deltaTime >= 0)
+					Value -= ValueConsumedPerSecond * ConsumeMultiplyer * Time.deltaTime;
+				else
+					Value = 0;
+			} else {
+				Value = ConsumingAction(resources, controls, this);
+			}
+		}
 	}
 }

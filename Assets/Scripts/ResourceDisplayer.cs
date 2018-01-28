@@ -17,7 +17,6 @@ public class ResourceDisplayer : MonoBehaviour {
 	void Update () {
 		foreach (var statBar in StatBars.GetComponentsInChildren<Slider>()) {
 			if(_resources.Keys.Contains(statBar.gameObject.name)) {
-				Debug.Log (statBar.gameObject.name);
 				statBar.value = _resources [statBar.gameObject.name].Value;
 			}
 		}
