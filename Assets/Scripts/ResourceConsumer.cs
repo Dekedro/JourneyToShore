@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class ResourceConsumer : MonoBehaviour {
 
 	public bool consumeResources = true;
+	public GameObject looseScreen;
 
 	private IDictionary<string, Slider> _controlSliders { 
 		get { 
@@ -29,6 +30,11 @@ public class ResourceConsumer : MonoBehaviour {
 		foreach (var resource in _resources.Keys) {
 			if(resource != "Armor")
 				_resources[resource].Consume (_resources, _controlSliders);
+			if (_resources [resource].Value == _resources [resource].LowerBound && resource != "Fuel" && resource != "Battery")
+				looseScreen.SetActive(true);
+			if (resource == "Depth" && _resources [resource].Value >= _resources [resource].UpperBound) {
+				looseScreen.SetActive(true);
+			}
 		}
 	}
 
