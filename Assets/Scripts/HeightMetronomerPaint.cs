@@ -8,7 +8,7 @@ public class HeightMetronomerPaint : MonoBehaviour {
 	Vector3 start;
 	Vector3 end;
 	Vector3 movePoint;
-	float maxheight = 1000;  /* CHANGE THIS VALUE, PLEASE */
+	float maxheight = 8000;  /* CHANGE THIS VALUE, PLEASE */
 	float maxNumberOfPoints = 500; 
 
 	private SubmarineResource _depth;
@@ -30,12 +30,12 @@ public class HeightMetronomerPaint : MonoBehaviour {
 		}
 
 		for (int i = 0; i < points.Count; ++i) {
-			P [i].x = points [i].x * background.gameObject.transform.lossyScale.x*0.8f + background.gameObject.transform.position.x;// * GetComponentInParent<Transform> ().lossyScale.x;
+			P [i].x = points [i].x * background.gameObject.transform.lossyScale.x * 0.8f + background.gameObject.transform.position.x;
+			P [i].y = points [i].y * background.gameObject.transform.lossyScale.y * 0.8f + background.gameObject.transform.position.y;
+			P [i].z = -8;
 
-			P [i].y = points [i].y * background.gameObject.transform.lossyScale.y*0.8f +  background.gameObject.transform.position.y;// * GetComponentInParent<Transform> ().lossyScale.y;
-
-			P [i].z = -8;//points [i].z * background.gameObject.transform.lossyScale.z + background.gameObject.transform.position.z;// * GetComponentInParent<Transform> ().lossyScale.z;
 		}
+
 		for (int i = points.Count; i < maxNumberOfPoints; ++i) {
 			P [i] = P [points.Count - 1];
 		}

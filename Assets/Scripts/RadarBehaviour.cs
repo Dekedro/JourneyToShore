@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class RadarBehaviour : MonoBehaviour {
 
-	private ParticleSystem _particles;
+	public ParticleSystem _particles;
 	void Start () {
-		_particles = GetComponentInChildren<ParticleSystem> ();
+		//_particles = GetComponentInChildren<ParticleSystem> ();
 	}
 	
 	public void FireSonar() {

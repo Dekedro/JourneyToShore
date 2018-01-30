@@ -39,7 +39,6 @@ public class ControllerBehaviour : MonoBehaviour {
 		var slider = _controllers["Speed"];
 
 		_resources ["Speed"].Value = _resources ["Speed"].UpperBound * slider.value;
-		Debug.Log (_resources ["Speed"].Value);
 
 		_resources ["Fuel"].ConsumeMultiplyer = 1f + Mathf.Abs(slider.value);
 		_resources ["Battery"].ConsumeMultiplyer = 1f + Mathf.Abs(slider.value);

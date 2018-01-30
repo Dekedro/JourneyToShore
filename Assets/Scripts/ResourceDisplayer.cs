@@ -10,7 +10,6 @@ public class ResourceDisplayer : MonoBehaviour {
 
 	void Start () {
 		_resources = GameObject.FindGameObjectWithTag ("Player").GetComponent<SubmarineBehaviour> ().Resources;
-		//Debug.Log (_resources ["Food"].Percentage);
 		SetBounds();
 	}
 	

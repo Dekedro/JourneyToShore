@@ -38,7 +38,6 @@ public class MovementBehaviour : MonoBehaviour {
 		}
 
 		var velocityMagnitude = GetComponent<Rigidbody2D> ().velocity.magnitude;
-		//GetComponent<Rigidbody2D> ().velocity = Vector2.zero;
 		var newVelocity = transform.up * velocityMagnitude;
 		GetComponent<Rigidbody2D> ().velocity = new Vector3(newVelocity.x, newVelocity.y, 0);
 	}

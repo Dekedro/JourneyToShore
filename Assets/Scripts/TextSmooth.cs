@@ -5,20 +5,18 @@ using UnityEngine.UI;
 
 public class TextSmooth : MonoBehaviour {
 	LinkedList<string> story;
-	// Use this for initialization
 	float scene_start;
-	//float last_text_printed;
 	bool stop = false;
 	string now_writing_text;
-	float writing_speed = 20;
+	float writing_speed = 100;
 	void Start () {
 		Time.timeScale = 0;
 		scene_start = Time.time;
-		//last_text_printed = scene_start;
 		GetComponent<Text>().text = "";
 
 		story = new LinkedList<string>();
-		story.AddLast ("Dark times were upon this world. Terror and despair pledged our lands. Earth, water and air were all divided into two. One - ruled by the cruel and mighty emperor Desaix. Other - taken over by ruthless king Berkut. Both rulers dispised eachother and seeked to conquer the lands that were not yet their's. Five years ago, the war finally broke out and majority of humankind was wiped out. Now, even though the fights are not as intense, they can still change the outcome of war.");
+		story.AddLast ("Dark times were upon this world. Terror and despair pledged our lands. Earth, water and air were all divided into two. One - ruled by the cruel and mighty emperor Desaix. Other - taken over by ruthless king Berkut. Both rulers dispised eachother and seeked to conquer the lands that were not yet their's. Five years ago, the war finally broke out and majority of humankind was wiped out.");
+		story.AddLast ("Now, even though the fights are not as intense, they can still change the outcome of war.");
 		story.AddLast ("Jesse: Ahhhh... Captain, even if we managed to steal the intel we came here for, I fear that we won't make it back to the capital. Our ship is sinking at a rapid pace. ");
 		story.AddLast ("Captain Loyd: Damn it. No information is worth it if we have to sacrifice our brothers.");
 		story.AddLast ("Jesse: There's nothing you can do now. I'm sorry...");
@@ -45,37 +43,18 @@ public class TextSmooth : MonoBehaviour {
 		story.AddLast ("Captain Loyd: I hope you do. Lastly, in the left bottom corner you can elevation meter that shows our distance from the ground. Keep an eye on that one.");
 		story.AddLast ("Jesse: I think I got it Captain.");
 		story.AddLast ("Captain Loyd: Perfect. Now, let's run from our graves. My beloved Lavaiathan will take us home tonight. ");
-		//story.AddLast ("");
-		//story.AddLast ("");
-		//story.AddLast ("");
-		//story.AddLast ("");
-		//story.AddLast ("");
 
-
-
-
-		//story.AddLast ("Third text a lot a lot Third text a lot a lot Third text a lot a lot Third text a lot a lot Third text a lot a lot ");
-		now_writing_text = "Use spacebar to read story";
-		StartCoroutine (Whatever (""));//Whatever ();
-
-
-		/*
-		while (!(story.First == null)) {
-			string t = story.First.Value;
-			story.RemoveFirst ();
-			StartCoroutine (Whatever(t));
-		}
-		*/
+		now_writing_text = "Press spacebar to read the story.";
+		StartCoroutine (Print ("Press spacebar to read the story."));
 
 	}
 
 
 
-	private IEnumerator Whatever(string s) {
+	private IEnumerator Print(string s) {
 		int n = 0;
 		int t = 0;
 		while (n < s.Length && !stop && s==now_writing_text) {
-			//text += "a";
 			if(t*writing_speed > n) {
 				GetComponent<Text> ().text += s [n];
 				n++;
@@ -91,14 +70,12 @@ public class TextSmooth : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		//GetComponent<Text> ().text;
-
 		if (stop && Input.GetKeyDown("space")) {
 			stop = false;
 			GetComponent<Text>().text = "";
 			if (story.First != null) {
 				now_writing_text = story.First.Value;
-				StartCoroutine (Whatever (story.First.Value));
+				StartCoroutine (Print (story.First.Value));
 				story.RemoveFirst ();
 			} else {
 				transform.parent.gameObject.SetActive(false);
@@ -106,24 +83,12 @@ public class TextSmooth : MonoBehaviour {
 			}
 
 		} 
-			
-
-
 	}
 
 
 	void FixedUpdate() {
-		//
-
-
-		if (Input.GetKeyDown ("space")) {
-			writing_speed = 0.8f;
+		if (Input.GetKeyDown("space")) {
+			writing_speed = 0.2f;
 		}
-		if(Input.GetKeyUp("space")) {
-			writing_speed = 10f;
-		}//*/
-
 	}
-
-
 }

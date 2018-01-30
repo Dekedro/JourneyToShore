@@ -105,12 +105,10 @@ public class SlidingBehaviour : MonoBehaviour {
 	}
 
 	public void Pause() {
-		Debug.Log("pausing...");
 		_movementPaused = true;
 	}
 
 	public void Unpause() {
-		Debug.Log("unpausing...");
 		_movementPaused = false;
 	}
 }
